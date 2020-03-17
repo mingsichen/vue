@@ -17,9 +17,9 @@
 					</li> -->
 					<li class='pull'>{{ pullMessage }}</li>
 					<li v-for="item in comingList" :key='item.id'>
-						<div class="pic_show"><img src="/images/movie_2.jpg"></div>
+						<div class="pic_show" @touchstart="toDetail(item.id)"><img src="/images/movie_2.jpg"></div>
 						<div class="info_list">
-							<h2>{{item.nm}}</h2>
+							<h2 @touchstart="toDetail(item.id)">{{item.nm}}</h2>
 							<p><span class="person">{{item.wish}}</span> 人想看</p>
 							<p>主演: {{item.star}}</p>
 							<p>{{item.comingTitle}}</p>
@@ -60,7 +60,11 @@ export default {
 		  if(pos.y > 30){
 			  this.pullMessage = '正在更新';
 		  }
+		 
 	  },
+	   toDetail(movieid){
+			this.$router.push('/movie/detail/2/' +movieid ) ; 
+		  },
 	  handleToTouchEnd(pos){
 		  	if(pos.y > 30 ){
 				  this.axios.get('/api/movieOnInfoList?cityId=11').then((res)=>{
