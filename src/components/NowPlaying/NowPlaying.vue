@@ -20,9 +20,9 @@
 					<li class='pull'>{{ pullMessage }}</li>
 
 					<li v-for="item in movieList" :key='item.id'>
-						<div class="pic_show" @tap="handleToDetail"><img src="/images/movie_1.jpg"></div>
+						<div class="pic_show" @tap="handleToDetail(item.id)"><img src="/images/movie_1.jpg"></div>
 						<div class="info_list">
-							<h2>{{item.nm}}</h2>
+							<h2 @tap="handleToDetail(item.id)">{{item.nm}}</h2>
 							<p>观众评 <span class="grade">9.8</span></p>
 							<p>主演: {{item.star}}</p>
 							<p>{{item.comingTitle}}</p>
@@ -32,7 +32,7 @@
 						</div>
 					</li> 
 				</ul>
-d			</Scroller>
+			</Scroller>
 			</div>
 			
 </template>
@@ -61,6 +61,7 @@ export default {
 
 	  console.log('123');
 	  this.axios.get("/api/movieOnInfoList?cityId=" + cityId ).then((res)=>{
+		 /*  console.log(res); */
 		  var msg = res.data.msg;
 		  if(msg === 'ok'){
 
@@ -125,8 +126,9 @@ export default {
 				  });
 			  }
 	  },
-	  handleToDetail(){
-		 
+	  handleToDetail(moveid){
+	
+		this.$router.push('/movie/detail/1/' + moveid)
 	  }
   },
 }

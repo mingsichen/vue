@@ -3,30 +3,26 @@
      <Header />
      <div id="content">
 		  <div class="movie_menu">
-				<router-link tag="div" to="/movie/city" class="city_name">
-					<span>{{ $store.state.city.nm }}</span><i class="iconfont icon-lower-triangle"></i>
-				</router-link>
-				<div to="/movie/city" class="hot_swtich">
-					<router-link tag="div" to="/movie/nowPlaying" class="hot_item ">正在热映</router-link>
-					<router-link tag="div" to="/movie/commingSoon" class="hot_item">即将上映</router-link>
-				</div>
-			   <router-link tag="div" to="/movie/search" class="search_entry">
-					<i class="iconfont icon-sousuo"></i>
-			  </router-link>
+          <router-link tag="div" to="/movie/city" class="city_name">
+            <span>{{ $store.state.city.nm }}</span><i class="iconfont icon-lower-triangle"></i>
+          </router-link>
+          <div to="/movie/city" class="hot_swtich">
+            <router-link tag="div" to="/movie/nowPlaying" class="hot_item ">正在热映</router-link>
+            <router-link tag="div" to="/movie/commingSoon" class="hot_item">即将上映</router-link>
+          </div>
+          <router-link tag="div" to="/movie/search" class="search_entry">
+            <i class="iconfont icon-sousuo"></i>
+          </router-link>
 			</div>
         <!-- 二级路由的渲染和缓存 -->
 		<keep-alive>
-			<router-view></router-view>
+			<router-view/>
 		</keep-alive>
-
-
-
-        
      </div>
+  <TabBar/>
 
-<TabBar/>
-   
-   
+  
+  <router-view name="detail"/>
  </div>
 </template>
  
@@ -35,7 +31,7 @@ import Header from "@/components/Header/Header";
 import TabBar from "@/components/TabBar/TabBar";
 
 import { messageBox } from "@/components/JS";
-import { setTimeout } from 'timers';
+
 
 export default {
   name: "Movie",
@@ -63,14 +59,14 @@ export default {
           handleOk() {
               window.localStorage.setItem('nowNm',nm);
             window.localStorage.setItem('nowId',id);
-            window.location.reload();
+            window.location.reload();  /* 浏览器刷新当前页面。 */
            
           }
         });
       }
     });
     },2000);
- this.$router.push('/movie/nowPlaying');
+/*  this.$router.push('/movie/nowPlaying'); */
   }
 };
 </script>
